@@ -1,11 +1,20 @@
-package nl.quintor.jeerestdemo;
+package nl.quintor.jeerestdemo.model;
 
+import jakarta.persistence.*;
+import nl.quintor.jeerestdemo.Category;
+
+@Entity
 public class Product {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     private String name;
 
     private float price;
 
+    @Enumerated(EnumType.STRING)
     private Category category;
 
     public Product() {
@@ -42,4 +51,11 @@ public class Product {
         this.category = category;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }

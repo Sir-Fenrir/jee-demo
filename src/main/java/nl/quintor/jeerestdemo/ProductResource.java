@@ -1,25 +1,47 @@
 package nl.quintor.jeerestdemo;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import nl.quintor.jeerestdemo.model.Product;
+import nl.quintor.jeerestdemo.repository.ProductRepository;
 
-import java.util.ArrayList;
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 @Path ("/products")
 @ApplicationScoped
 public class ProductResource {
 
-    private List<Product> products = new ArrayList<>();
+    private ProductRepository productRepository;
+
+
+    public ProductResource() {}
+
+    @Inject
+    public ProductResource(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Product> getAllProducts() {
+        return productRepository.getAllProducts();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product getProduct(@PathParam("id") long id) {
+        return productRepository.getProductById(id);
+    }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Product addProduct(Product product) {
-        this.products.add(product);
-        return product;
+        return productRepository.saveProduct(product);
     }
 
 }
