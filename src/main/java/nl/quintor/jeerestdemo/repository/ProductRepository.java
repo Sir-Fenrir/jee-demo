@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductRepository {
 
     @PersistenceContext(name = "TenderNed")
-    private EntityManager entityManager;
+    EntityManager entityManager;
 
     public List<Product> getAllProducts() {
         TypedQuery<Product> products = this.entityManager.createQuery("select p from Product p", Product.class);
