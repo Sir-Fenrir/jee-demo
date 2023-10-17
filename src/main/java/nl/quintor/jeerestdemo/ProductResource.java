@@ -2,8 +2,10 @@ package nl.quintor.jeerestdemo;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
+import nl.quintor.jeerestdemo.exception.ErrorDTO;
 import nl.quintor.jeerestdemo.model.Product;
 import nl.quintor.jeerestdemo.repository.ProductRepository;
 
@@ -40,7 +42,7 @@ public class ProductResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Product addProduct(Product product) {
+    public Product addProduct(@Valid Product product) {
         return productRepository.saveProduct(product);
     }
 

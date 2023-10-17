@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import nl.quintor.jeerestdemo.model.Product;
 
 import java.util.List;

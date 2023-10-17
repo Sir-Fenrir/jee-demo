@@ -1,6 +1,8 @@
 package nl.quintor.jeerestdemo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PositiveOrZero;
 import nl.quintor.jeerestdemo.Category;
 
 @Entity
@@ -10,8 +12,10 @@ public class Product {
     @GeneratedValue
     private Long id;
 
+    @NotEmpty(message = "Naam mag niet leeg zijn")
     private String name;
 
+    @PositiveOrZero
     private float price;
 
     @Enumerated(EnumType.STRING)
